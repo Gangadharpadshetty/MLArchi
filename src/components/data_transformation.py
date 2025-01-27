@@ -58,8 +58,28 @@ class DataTransformation:
                                    ("cat_pipeline",cat_pipeline,categorical_columns)
                             ]
                      )
+                     return preprocessor
 
-              except:
-                     pass
+
+              except exception as e:
+                     raise CustomException(e,sys)
+
+       def initiate_data_transformation(self,train_path,test_path):
+              try:
+                     logging.info("Data transformation initiated")
+                     train_df=pd.read_csv(train_path)
+                     test_df=pd.read_csv(test_path)
+                     preprocessor_obj=self.get_data_transformer_object()
+                     logging.info("Data transformation completed")
+                     logging.info("Saving the preprocessor object")
+
+                     input_feature_train_df=train_df.drop("math_score",axis=1)
+                     save_object
+                     (file_path=self.data_transformation_conf,
+                     obj=preprocessor_obj)
+                      
+                     
+              except Exception as e:
+                     raise CustomException(e,sys)
 
 
