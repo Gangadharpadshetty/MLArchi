@@ -1,20 +1,27 @@
-# Ensure the current working directory is in the sys.path
-sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 from typing import List
-import os
-import sys
+
+HYPEN_E_DOT = '-e .'
+
 def get_requirements(file_path: str) -> List[str]:
-    with open(file_path, 'r') as file:
-        return file.read().splitlines()
+    '''
+    This function will return the list of requirements
+    '''
+    requirements = []
+    with open(file_path) as file_obj:
+        requirements = file_obj.readlines()
+        requirements = [req.replace("\n", "") for req in requirements]
+
+        if HYPEN_E_DOT in requirements:
+            requirements.remove(HYPEN_E_DOT)
     
+    return requirements
 
 setup(
-name='MLops',
-version='0.1',
-description='A machine learning operations project',
-author='gangadhar',
-packages=find_packages(),
-install_requires=get_requirements('requirement.txt'),                
+    name='mlproject',
+    version='0.0.1',
+    author='gangadhar',
+    author_email='appupadashetty@gmail.com',
+    packages=find_packages(),
+    install_requires=get_requirements('requirements.txt')
 )
